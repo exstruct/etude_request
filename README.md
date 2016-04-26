@@ -9,7 +9,7 @@ Parallel HTTP requests for [etude](https://github.com/camshaft/etude)
   1. Add etude_request to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:etude_request, "~> 0.0.1"}]
+          [{:etude_request, "~> 0.1.0"}]
         end
 
   2. Ensure etude_request is started before your application:
