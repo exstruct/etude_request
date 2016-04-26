@@ -4,7 +4,7 @@ Parallel HTTP requests for [etude](https://github.com/camshaft/etude)
 
 ## Installation
 
-Etude.Request is [available in Hex](https://hex.pm/docs/publish) and can be installed as:
+`Etude.Request` is [available in Hex](https://hex.pm/docs/publish) and can be installed as:
 
   1. Add etude_request to your list of dependencies in `mix.exs`:
 
@@ -32,9 +32,9 @@ IO.inspect {gh_status, gh_headers, gh_body}
 
 IO.inspect Etude.resolve([{gh_status, gh_headers}, {ip_status, ip_body}])
 # [{200, [{"Server", "GitHub.com"}, ...]},
-   {200, "123.456.789.0"}]
+#  {200, "123.456.789.0"}]
 ```
 
 ## API
 
-The options and functions should mostly be compatible with (httpoison)[https://github.com/edgurgel/httpoison]. One big exception is all functions in `Etude.Request` raise errors instead of return `{:ok, value} | {:error, reason}`, since error checking is done at request time instead of call time.
+The options and functions should mostly be compatible with [httpoison](https://github.com/edgurgel/httpoison). One big exception is all functions in `Etude.Request` raise errors instead of return `{:ok, value} | {:error, reason}`, since error checking is done at request time instead of call time.
