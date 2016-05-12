@@ -6,7 +6,7 @@ defmodule Etude.Request do
   def __request__(request, req_id, state) do
     case Map.fetch(state.private, {__MODULE__, req_id}) do
       :error ->
-        case Etude.Serializer.TERM.__serialize__(request, state) do
+        case Etude.Thunk.resolve_recursive(request, state) do
           {:await, thunk, state} ->
             {:await, &__request__(thunk, req_id, &1), state}
           {request, state} ->
