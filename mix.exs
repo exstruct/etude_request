@@ -3,7 +3,7 @@ defmodule Etude.Request.Mixfile do
 
   def project do
     [app: :etude_request,
-     version: "0.1.0",
+     version: "0.2.0",
      elixir: "~> 1.2",
      description: "Parallel HTTP requests for etude",
      build_embedded: Mix.env == :prod,
@@ -24,7 +24,8 @@ defmodule Etude.Request.Mixfile do
      {:httparrot, "~> 0.4.0", only: :test},
      {:hackney, "~> 1.6.0"},
      {:poison, "~> 2.2.0", only: :test},
-     {:mix_test_watch, "~> 0.2", only: :dev },]
+     {:mix_test_watch, "~> 0.2", only: :dev},
+     {:ex_doc, ">= 0.0.0", only: :dev}]
   end
 
   defp package do
