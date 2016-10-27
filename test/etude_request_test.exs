@@ -7,15 +7,21 @@ defmodule Etude.Request.Test do
   end
 
   test "makes several requests in parallel" do
-    {_, _, body1} = url("/get") |> Etude.Request.get()
-    req1 = url("/post") |> Etude.Request.post(body1)
-    req2 = url("/put") |> Etude.Request.put(body1)
+    {a, b} = url("/get")
+    |> Etude.Request.get()
+    |> Etude.chain(fn(%{body: body}) ->
+      [
+        url("/post") |> Etude.Request.post(body),
+        url("/put") |> Etude.Request.put(body)
+      ]
+      |> Etude.join()
+    end)
+    |> Etude.map(fn([%{body: a}, %{body: b}]) ->
+      {Poison.decode!(a), Poison.decode!(b)}
+    end)
+    |> Etude.fork!()
 
-    {{{200, _, bp1}, {200, _, bp2}}, _} = Etude.resolve({req1, req2}, %Etude.State{mailbox: self()})
-    {{{200, _, bl1}, {200, _, bl2}}, _} = Etude.resolve({req1, req2}, %Etude.State{mailbox: []})
-
-    assert to_string(bp1) == to_string(bl1)
-    assert to_string(bp2) == to_string(bl2)
+    assert a["json"]["url"] == b["json"]["url"]
   end
 
   defp url(path) do

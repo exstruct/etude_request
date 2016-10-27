@@ -20,16 +20,17 @@ defmodule Etude.Request.Mixfile do
   end
 
   defp deps do
-    [{ :etude, "~> 1.0.0-beta.1" },
-     { :httparrot, "~> 0.3.4", only: :test },
-     { :hackney, "~> 1.6.0" },
-     { :mix_test_watch, "~> 0.2", only: :dev },]
+    [{:etude, "~> 1.0.0"},
+     {:httparrot, "~> 0.4.0", only: :test},
+     {:hackney, "~> 1.6.0"},
+     {:poison, "~> 2.2.0", only: :test},
+     {:mix_test_watch, "~> 0.2", only: :dev },]
   end
 
   defp package do
     [files: ["lib", "mix.exs", "README*"],
      maintainers: ["Cameron Bytheway"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/camshaft/etude_request"}]
+     links: %{"GitHub" => "https://github.com/exstruct/etude_request"}]
   end
 end

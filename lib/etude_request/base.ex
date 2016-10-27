@@ -20,13 +20,7 @@ defmodule Etude.Request.Base do
                     headers: headers,
                     options: options} # TODO add manipulation functions from the macro caller here
 
-        req_id = :erlang.phash2(request)
-
-        exec = &Etude.Request.__request__(request, req_id, &1)
-
-        {%Etude.Request.Response.Status{request: exec},
-         %Etude.Request.Response.Headers{request: exec},
-         %Etude.Request.Response.Body{request: exec}}
+        Etude.Request.future(request)
       end
     end
   end
